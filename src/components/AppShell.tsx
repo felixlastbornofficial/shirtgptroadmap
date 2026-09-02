@@ -6,9 +6,11 @@ import { useAuth } from "@/hooks/useAuth";
 function initials(value: string) {
   const clean = value.replace(/[^a-zA-Z ]/g, " ").trim();
   const parts = clean.split(/\s+/).filter(Boolean);
-  if (parts.length === 0) return "SG";
-  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
-  return (parts[0][0] + parts[1][0]).toUpperCase();
+  const first = parts[0] ?? "";
+  const second = parts[1] ?? "";
+  if (!first) return "SG";
+  if (!second) return first.slice(0, 2).toUpperCase();
+  return (first.slice(0, 1) + second.slice(0, 1)).toUpperCase();
 }
 
 export function Orbs() {
