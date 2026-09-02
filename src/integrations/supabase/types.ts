@@ -14,7 +14,191 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      integrations: {
+        Row: {
+          created_at: string
+          detail: string | null
+          id: string
+          last_synced_at: string | null
+          provider: string
+          status: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          detail?: string | null
+          id?: string
+          last_synced_at?: string | null
+          provider: string
+          status?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          detail?: string | null
+          id?: string
+          last_synced_at?: string | null
+          provider?: string
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      milestones: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          position: number
+          roadmap_id: string
+          title: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          position?: number
+          roadmap_id: string
+          title: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          position?: number
+          roadmap_id?: string
+          title?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "milestones_roadmap_id_fkey"
+            columns: ["roadmap_id"]
+            isOneToOne: false
+            referencedRelation: "roadmaps"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          accent: string
+          created_at: string
+          display_name: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          accent?: string
+          created_at?: string
+          display_name?: string | null
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          accent?: string
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      roadmaps: {
+        Row: {
+          archived: boolean
+          created_at: string
+          goal: string
+          id: string
+          level: string
+          status: string
+          summary: string | null
+          timeframe: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          archived?: boolean
+          created_at?: string
+          goal: string
+          id?: string
+          level?: string
+          status?: string
+          summary?: string | null
+          timeframe?: string
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          archived?: boolean
+          created_at?: string
+          goal?: string
+          id?: string
+          level?: string
+          status?: string
+          summary?: string | null
+          timeframe?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      steps: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          done: boolean
+          id: string
+          milestone_id: string
+          position: number
+          roadmap_id: string
+          title: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          done?: boolean
+          id?: string
+          milestone_id: string
+          position?: number
+          roadmap_id: string
+          title: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          done?: boolean
+          id?: string
+          milestone_id?: string
+          position?: number
+          roadmap_id?: string
+          title?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "steps_milestone_id_fkey"
+            columns: ["milestone_id"]
+            isOneToOne: false
+            referencedRelation: "milestones"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "steps_roadmap_id_fkey"
+            columns: ["roadmap_id"]
+            isOneToOne: false
+            referencedRelation: "roadmaps"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
