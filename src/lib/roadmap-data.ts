@@ -126,3 +126,30 @@ export function percent(steps: { done: boolean }[]) {
   if (steps.length === 0) return 0;
   return Math.round((steps.filter((s) => s.done).length / steps.length) * 100);
 }
+
+export async function connectIntegration(provider: string, detail: string) {
+  const { data: auth } = await supabase.auth.getUser();
+  const userId = auth.user?.id;
+  if (!userId) throw new Error("You need to be signed in.");
+  const { error } = await supabase.from("integrations").insert({
+    user_id: userId,
+    provider,
+    detail,
+    status: "connected",
+    last_synced_at: new Date().toISOString(),
+  });
+  if (error) throw error;
+}
+
+export async function disconnectIntegration(id: string) {
+  const { error } = await supabase.from("integrations").delete().eq("id", id);
+  if (error) throw error;
+}
+
+export async function syncIntegration(id: string) {
+  const { error } = await supabase
+    .from("integrations")
+    .update({ last_synced_at: new Date().toISOString(), status: "connected" })
+    .eq("id", id);
+  if (error) throw error;
+}
