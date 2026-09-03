@@ -85,7 +85,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "ShirtGPT turns any goal into a trackable roadmap and syncs it with Notion, Trello and Google Calendar.",
       },
-      { name: "author", content: "ShirtGPT" },
+      { name: "author", content: "Felix Mureithi Muthee" },
       { property: "og:title", content: "ShirtGPT — Roadmaps for Any Goal" },
       {
         property: "og:description",

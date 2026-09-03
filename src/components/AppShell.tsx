@@ -88,6 +88,13 @@ export function AppShell({ children }: { children: ReactNode }) {
         </header>
 
         <main className="mt-8">{children}</main>
+
+        <footer className="mt-16 flex flex-col items-center justify-center gap-2 border-t border-border/50 py-8 text-center text-xs text-muted-foreground sm:flex-row sm:gap-3">
+          <span>Made with care by</span>
+          <span className="font-semibold text-foreground">Felix Mureithi Muthee</span>
+          <span className="hidden sm:inline">·</span>
+          <span>Creator of ShirtGPT</span>
+        </footer>
       </div>
     </div>
   );
